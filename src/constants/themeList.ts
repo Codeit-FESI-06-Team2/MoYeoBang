@@ -1,8 +1,16 @@
-// 모임 생성 모달에서 사용
-export const themeList = {
-  건대: {
-    key: 'geondae',
-    themeName: [
+interface Theme {
+  label: string;
+  theme: string[];
+}
+
+interface ThemeList {
+  [key: string]: Theme;
+}
+
+export const themeList: ThemeList = {
+  geondae: {
+    label: '건대',
+    theme: [
       '몬스터 : 10800',
       '이불밖은 위험해',
       'B아파트 13동 1313',
@@ -14,9 +22,9 @@ export const themeList = {
       '어제, 그리고 오늘',
     ],
   },
-  홍대: {
-    key: 'hongdae',
-    themeName: [
+  hongdae: {
+    label: '홍대',
+    theme: [
       '이미지 세탁소',
       '경성 연쇄실종사건',
       'And I met E',
@@ -31,9 +39,9 @@ export const themeList = {
       '전래동 자살사건',
     ],
   },
-  혜화: {
-    key: 'hyehwa',
-    themeName: [
+  hyehwa: {
+    label: '혜화',
+    theme: [
       '구룡 : 잠들지 않는 도시',
       '비밀의 모험',
       '슈퍼플레이어:PLAYER1',
@@ -44,9 +52,9 @@ export const themeList = {
       '작전명 : 옵저버',
     ],
   },
-  강남: {
-    key: 'gangnam',
-    themeName: [
+  gangnam: {
+    label: '강남',
+    theme: [
       '3일',
       '검은 운명의 밤',
       '響 : 향',

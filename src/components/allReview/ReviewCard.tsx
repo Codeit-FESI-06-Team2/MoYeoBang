@@ -11,16 +11,17 @@ export default function ReviewCard({
   User,
 }: ReviewDto['get']) {
   return (
-    <article className="flex w-full flex-col gap-6 rounded-[20px] bg-[#2e2e2e] md:flex-row md:gap-5">
-      <div className="relative h-[156px] w-full md:h-[172px] md:w-[320px]">
+    <article className="flex w-full flex-col rounded-[20px] bg-[#2e2e2e] md:flex-row">
+      <div className="relative min-h-[330px] min-w-[185px] md:min-h-[185px] md:min-w-[330px]">
         <Image
           src={Gathering.image}
           alt={Gathering.themeName}
           fill
-          className="rounded-[20px]"
+          quality={100}
+          className="rounded-t-[20px] md:rounded-l-[20px] md:rounded-r-[0px]"
         />
       </div>
-      <div className="flex flex-col justify-center gap-[13px] p-4 md:w-[723px] md:p-0 md:px-10">
+      <div className="flex w-full flex-col gap-[13px] px-[25px] py-5">
         <div className="flex flex-col gap-[7px]">
           <Rating rating={score} width={120} height={24} />
           <h2 className="text-xs font-medium text-[#b5b5b5]">
@@ -34,6 +35,7 @@ export default function ReviewCard({
             alt={User.nickname}
             width={24}
             height={24}
+            quality={100}
             className="rounded-full"
           />
           <p className="border-r border-[#b5b5b5] px-[5px] text-xs font-medium text-[#b5b5b5]">
