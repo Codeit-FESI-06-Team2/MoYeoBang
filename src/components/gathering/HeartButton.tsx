@@ -55,7 +55,7 @@ export default function HeartButton({
   };
 
   return (
-    <div className="absolute right-2 top-1 md:right-6 md:top-4 ">
+    <div className="absolute right-2 top-1 md:right-6 md:top-4">
       <button type="button" onClick={handleFavoriteToggle}>
         {isFavorited ? <HeartFullIcon /> : <HeartEmptyIcon />}
       </button>

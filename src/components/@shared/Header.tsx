@@ -66,7 +66,7 @@ export default function Header() {
                     variant="primary"
                     size="small"
                     font="14"
-                    className=" border border-white"
+                    className="border border-white"
                   >
                     로그인/회원가입
                   </Button>

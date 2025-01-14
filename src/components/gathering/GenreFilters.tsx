@@ -27,7 +27,7 @@ export default function GenreFilters() {
     isSelected ? 'text-white customUnderline' : 'text-text-disabled';
 
   return (
-    <ul className="scrollbar-hidden flex  gap-3 overflow-x-auto overflow-y-hidden whitespace-nowrap text-lg font-semibold">
+    <ul className="scrollbar-hidden flex gap-3 overflow-x-auto overflow-y-hidden whitespace-nowrap text-lg font-semibold">
       {genres.map((genre) => (
         <button
           key={genre.value}

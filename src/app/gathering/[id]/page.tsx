@@ -1,15 +1,11 @@
-'use client';
+export default function GatheringDetail({ params }: any) {
+  const { id } = params;
 
-import GatheringDetail from '@/components/gatheringDetail/GatheringDetail';
-
-export default function GatheringDetailPage({
-  params,
-}: {
-  params: { id: string };
-}) {
   return (
-    <main className="min-h-screen bg-brand-primary px-4 py-6">
-      <GatheringDetail gatherId={params.id} />
-    </main>
+    <div>
+      {/* TEST: id 값을 정상적으로 로드 */}
+      <h1 className="mt-36">Gathering ID: {id}</h1>
+      <p>오정협 - 모임 상세페이지</p>
+    </div>
   );
 }

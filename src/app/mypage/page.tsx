@@ -75,7 +75,7 @@ export default function MyPage() {
   };
 
   return (
-    <main className="mx-[150px] my-[130px] flex flex-col justify-center ">
+    <main className="mx-[150px] my-[130px] flex flex-col justify-center">
       <p className="text-xl font-bold">{`안녕하세요 ${user.nickname}님!`}</p>
       <div className="mb-12 mt-8 flex h-[130px] items-center justify-around rounded-[25px] border bg-orange-600">
         <div className="text-text-primary">
@@ -87,7 +87,7 @@ export default function MyPage() {
           variant="primary"
           size="small"
           font="14"
-          className="border-text-primary "
+          className="border-text-primary"
           onClick={openModalhandler}
         >
           <p>프로필 편집</p>
