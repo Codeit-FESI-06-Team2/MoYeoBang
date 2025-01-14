@@ -155,7 +155,6 @@ export default function MyPage() {
             <button
               type="button"
               key={link.label}
-              type="button"
               className={`text-lg font-bold ${
                 activeTab === link.label ? 'border-b-2 border-black' : ''
               }`}

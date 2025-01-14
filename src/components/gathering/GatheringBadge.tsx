@@ -1,14 +1,7 @@
+import Image from 'next/image';
 import clsx from 'clsx';
 
-import Image from 'next/image';
-
-interface BadgeProps {
-  icon?: '고급' | '중급' | '초급';
-  shape?: 'default' | 'round';
-  variant?: 'primary' | 'secondary' | 'tertiary';
-  className?: string;
-  children: React.ReactNode;
-}
+import { GatheringProps } from '@/types/gathering.types';
 
 const levelIcons = {
   고급: { src: '/icons/level_low.svg', alt: '고급 난이도 아이콘' },
@@ -23,7 +16,7 @@ export default function GatheringBadge({
   className,
   children,
   ...props
-}: BadgeProps) {
+}: GatheringProps['badge']) {
   const BadgeClass = clsx(
     'm-0 flex h-[17px]  items-center  px-2 text-center text-[10px] md:h-6 md:text-xs',
     {

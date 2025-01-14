@@ -31,7 +31,7 @@ export interface GatheringDto {
 export interface GatheringRequestBody {
   post: {
     name: string;
-    location: '건대' | '홍대' | '강남' | '혜화';
+    location: string;
     themeName: string;
     dateTime: string;
     registrationEnd: string;
@@ -40,12 +40,35 @@ export interface GatheringRequestBody {
   patch: {
     gatheringId: number;
     name: string;
-    location: '건대' | '홍대' | '강남' | '혜화';
+    location: string;
     themeName: string;
     dateTime: string;
     registrationEnd: string;
   };
   delete: {
     gatheringId: number;
+  };
+}
+
+// Component's props
+export interface GatheringProps {
+  card: {
+    gatheringId: number;
+    location: string;
+    dateTime: string;
+    registrationEnd: string;
+    level: string;
+    name: string;
+    themeName: string;
+    capacity: string;
+    participantCount: string;
+    image: string;
+  };
+  badge: {
+    icon?: '고급' | '중급' | '초급';
+    shape?: 'default' | 'round';
+    variant?: 'primary' | 'secondary' | 'tertiary';
+    className?: string;
+    children: React.ReactNode;
   };
 }

@@ -9,10 +9,10 @@ export const mockReviews: ReviewDto['get'][] = [
     createdAt: '2025-01-15T14:30:00.000Z', // 리뷰 생성 날짜
     Gathering: {
       gatheringId: 1,
-      location: '강남', // 방탈출 테마 지역
+      location: 'gangnam', // 방탈출 테마 지역
       themeName: '마음을 그려드립니다.', // 방탈출 테마 이름
       image: 'https://xdungeon.net/file/theme/11/11_6145641280.jpg', // 방탈출 테마 이미지
-      genre: '판타지', // 장르
+      genre: 'fantasy', // 장르
       participantCount: 4, // 참여 인원
     },
     User: {
@@ -29,10 +29,10 @@ export const mockReviews: ReviewDto['get'][] = [
     createdAt: '2025-01-16T14:30:00.000Z', // 리뷰 생성 날짜
     Gathering: {
       gatheringId: 2,
-      location: '홍대', // 방탈출 테마 지역
+      location: 'hongdae', // 방탈출 테마 지역
       themeName: 'And I met E', // 방탈출 테마 이름
       image: 'https://xdungeon.net/file/theme/18/18_5563125084.png', // 방탈출 테마 이미지
-      genre: '판타지', // 장르
+      genre: 'fantasy', // 장르
       participantCount: 1, // 참여 인원
     },
     User: {
@@ -49,11 +49,11 @@ export const mockReviews: ReviewDto['get'][] = [
     createdAt: '2025-01-17T14:30:00.000Z', // 리뷰 생성 날짜
     Gathering: {
       gatheringId: 3,
-      location: '건대', // 방탈출 테마 지역
+      location: 'geondae', // 방탈출 테마 지역
       themeName: 'B아파트 13동 1313', // 방탈출 테마 이름
       image:
         'https://i.postimg.cc/B6ktkgKh/theme-Kakao-Talk-Photo-2019-03-05-17-11-51-4-B-13-1313.jpg', // 방탈출 테마 이미지
-      genre: '공포', // 장르
+      genre: 'horror', // 장르
       participantCount: 3, // 참여 인원
     },
     User: {

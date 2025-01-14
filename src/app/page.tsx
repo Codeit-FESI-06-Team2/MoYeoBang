@@ -1,5 +1,4 @@
-import Image from 'next/image';
-
+import CreateGatheringBtn from '@/components/gathering/CreateGatheringBtn';
 import GatheringCard from '@/components/gathering/GatheringCard';
 import GatheringFilters from '@/components/gathering/GatheringFilters';
 import GenreFilters from '@/components/gathering/GenreFilters';
@@ -26,33 +25,10 @@ export default function Gathering() {
 
         <section className="mx-auto grid h-full w-full grid-cols-1 gap-3 text-white xl:grid-cols-2">
           {mockGatherings.map((gathering: any) => (
-            <GatheringCard
-              registrationEnd={gathering.registrationEnd}
-              key={gathering.gatheringId}
-              location={gathering.location}
-              dateTime={gathering.dateTime}
-              level={gathering.level.toString()}
-              capacity={gathering.capacity}
-              name={gathering.name}
-              themeName={gathering.themeName}
-              image={gathering.image}
-              participantCount={gathering.participantCount.toString()}
-            />
+            <GatheringCard key={gathering.gatheringId} {...gathering} />
           ))}
         </section>
-        <button
-          type="button"
-          className="fixed bottom-12 right-8 xl:bottom-16 xl:right-1/5"
-        >
-          <Image
-            src="/icons/creator.svg"
-            alt="모임 생성 아이콘"
-            width={64}
-            height={64}
-            quality={100}
-            className="h-14 w-14 md:h-16 md:w-16"
-          />
-        </button>
+        <CreateGatheringBtn />
       </main>
     </div>
   );

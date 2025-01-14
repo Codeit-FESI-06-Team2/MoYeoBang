@@ -4,7 +4,7 @@ type ButtonProps = {
   type?: 'button' | 'submit' | 'reset';
   size?: 'large' | 'small' | 'full';
   font?: '16' | '14';
-  variant?: 'primary' | 'secondary';
+  variant?: 'primary' | 'secondary' | 'transparent';
   children: React.ReactNode;
 } & React.ComponentPropsWithoutRef<'button'>;
 
@@ -12,7 +12,7 @@ export default function Button({
   size,
   type = 'button',
   font = '16',
-  variant = 'primary',
+  variant,
   children,
   className,
   disabled,
@@ -31,7 +31,7 @@ export default function Button({
       'text-base font-semibold': font === '16',
       'text-sm font-semibold': font === '14',
       'h-11 w-[332px]': size === 'large',
-      'h-10 w-[120px]': size === 'small',
+      'h-11 w-[100px]': size === 'small',
       'w-full': size === 'full',
     },
     className

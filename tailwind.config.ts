@@ -14,7 +14,7 @@ const config: Config = {
         status: {
           hover: '#C2410C',
           focus: '#9A3412',
-          danger: '#DC2626',
+          danger: '#FF7171',
           disabled: '#535353',
           'signup-red': '#6A0D1D',
         },
