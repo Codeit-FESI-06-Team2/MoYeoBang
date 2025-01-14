@@ -56,7 +56,7 @@ export default function SignUpForm() {
 
           <button
             type="submit"
-            className="bg-status-signup-red mt-6 w-full rounded py-2.5 text-text-primary hover:opacity-90 focus:ring-2"
+            className="mt-6 w-full rounded bg-status-signup-red py-2.5 text-text-primary hover:opacity-90 focus:ring-2"
           >
             회원가입
           </button>
