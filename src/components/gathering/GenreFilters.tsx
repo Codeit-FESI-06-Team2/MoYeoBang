@@ -19,7 +19,6 @@ export default function GenreFilters() {
   const [selectedGenre, setSelectedGenre] = useState<string | null>(null);
 
   const handleGenreClick = (value: string) => {
-    console.log('click button:', value);
     setSelectedGenre(value);
   };
 

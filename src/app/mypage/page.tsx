@@ -52,14 +52,12 @@ export default function MyPage() {
     //  파일이 영어 이름으로만 되어 있다면
     const isEnglishName = /^[a-zA-Z0-9._-]+$/.test(file.name);
     if (!isEnglishName) {
-      alert('파일 이름은 영어로만 이루어져야 합니다.');
       return;
     }
 
     //  파일이 5MB 이하라면
     const maxSizeInBytes = 5 * 1024 * 1024;
     if (file.size > maxSizeInBytes) {
-      alert('파일 크기는 5MB 이하여야만 합니다.');
       return;
     }
 
