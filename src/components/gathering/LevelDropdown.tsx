@@ -15,10 +15,6 @@ export default function LevelDropdown({ onLevelChange }: LevelDropdownProps) {
   };
 
   return (
-    <Dropdown
-      options={levels}
-      onChange={handleChange}
-      defaultValue={levels[0]}
-    />
+    <Dropdown options={levels} onChange={handleChange} defaultLabel="난이도" />
   );
 }

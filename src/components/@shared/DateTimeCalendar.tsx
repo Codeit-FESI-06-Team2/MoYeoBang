@@ -78,6 +78,7 @@ export default function DateTimeCalendar({
           next2Label={null}
           prev2Label={null}
           minDetail="year"
+          className="date-time-calendar"
         />
         <ScrollTimePicker
           selectedHour={selectedHour}

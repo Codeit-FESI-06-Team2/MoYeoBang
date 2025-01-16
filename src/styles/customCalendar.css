@@ -1,6 +1,6 @@
 /* 캘린더 설정을 위한 CSS*/
 /* 캘린더 기본 설정 */
-.react-calendar {
+.custom-calendar {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -10,7 +10,7 @@
 }
 
 /* 네비게이션 */
-.react-calendar__navigation {
+.custom-calendar .react-calendar__navigation {
   display: flex;
   justify-content: space-between;
   color: #1f2937;
@@ -18,21 +18,21 @@
 }
 
 /* 네비게이션 타이틀 */
-.react-calendar__navigation__label {
+.custom-calendar .react-calendar__navigation__label {
   font-weight: 500;
   font-size: 14px;
   max-width: 120px;
 }
 
 /* 네비게이션 버튼 */
-.react-calendar__navigation__arrow {
+.custom-calendar .react-calendar__navigation__arrow {
   font-weight: 500;
   font-size: 24px;
   min-width: 24px;
 }
 
 /* 요일 */
-.react-calendar__month-view__weekdays abbr {
+.custom-calendar .react-calendar__month-view__weekdays abbr {
   text-decoration: none;
   font-weight: 600;
   justify-content: center;
@@ -44,21 +44,21 @@
 }
 
 /* 날짜 */
-.react-calendar__tile {
+.custom-calendar .react-calendar__tile {
   font-weight: 500;
   font-size: 14px;
   height: 32px;
 }
 
 /* 지난달과 다음달 날짜 */
-.react-calendar__month-view__days__day--neighboringMonth {
+.custom-calendar .react-calendar__month-view__days__day--neighboringMonth {
   color: #9ca3af;
 }
 
 /* 선택한 날짜 */
-.react-calendar__tile:enabled:hover,
-.react-calendar__tile:enabled:focus,
-.react-calendar__tile--active {
+.custom-calendar .react-calendar__tile:enabled:hover,
+.custom-calendar .react-calendar__tile:enabled:focus,
+.custom-calendar .react-calendar__tile--active {
   background-color: #e8e6fe;
   border-radius: 8px;
 }

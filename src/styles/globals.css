@@ -59,3 +59,9 @@
 .scrollbar-hidden::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
 }
+
+@layer utilities {
+  .bg-secondary-80 {
+    background-color: #3e404c;
+  }
+}

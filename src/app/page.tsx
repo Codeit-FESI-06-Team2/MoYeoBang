@@ -20,7 +20,6 @@ export default function Home() {
             width={1166}
             height={288}
             quality={100}
-            layout="responsive"
             className="max-h-full max-w-full rounded-3xl"
           />
         </header>

@@ -36,11 +36,10 @@ export default function NearDeadlines({ gatherings }: GatheringListProps) {
               width={204}
               height={158}
               quality={100}
-              layout="fit"
               className="mt-auto hidden max-h-full md:block xl:hidden"
             />
           </div>
-          <div className="grid grid-cols-1 grid-rows-1 gap-7 md:grid-cols-2">
+          <div className="grid grid-cols-1 grid-rows-1 gap-3 md:grid-cols-2 md:gap-7">
             {currentItems.map((gathering: any) => (
               <GatheringSlot
                 key={gathering.gatheringId}
@@ -70,7 +69,6 @@ export default function NearDeadlines({ gatherings }: GatheringListProps) {
           quality={100}
           width={487}
           height={466}
-          layout="responsive"
           className="mt-auto hidden md:hidden xl:block xl:max-h-[466px] xl:max-w-[457px]"
         />
       </div>

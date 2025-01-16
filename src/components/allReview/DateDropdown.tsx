@@ -15,23 +15,23 @@ export default function DateDropdown({ onDateChange }: DateDropdownProps) {
   });
 
   return (
-    <div className={clsx('relative min-w-[120px]')}>
+    <div className={clsx('relative max-w-[120px]')}>
       <button
         type="button"
         onClick={handleChange}
         className={clsx(
-          'h-[42px] w-[120px]',
+          'h-[42px] max-w-[120px]',
           'relative',
-          'border-2 border-[#808080]',
+          'border-2 border-default-tertiary',
           'rounded-xl',
           'px-4 py-2',
-          'bg-[#2C2C2C]',
+          'bg-default-tertiary',
           'flex items-center',
-          'gap-[2px]'
+          'gap-1'
         )}
       >
         <p className="flex-1 text-sm font-medium text-white">
-          {date === '' ? '모든 날짜' : date}
+          {date === '' ? '날짜' : date}
         </p>
         <Image
           src="/chevron-down.svg"
@@ -51,7 +51,7 @@ export default function DateDropdown({ onDateChange }: DateDropdownProps) {
           selectedDate={date}
           onClose={handleChange}
           onDateChange={handleDateChange}
-          layout="top-12 right-[-100px] md:left-0"
+          layout="top-12 md:left-0"
         />
       )}
     </div>

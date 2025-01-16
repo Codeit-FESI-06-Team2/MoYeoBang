@@ -19,7 +19,7 @@ export default function LocationDropdown({
     <Dropdown
       options={locationList}
       onChange={handleChange}
-      defaultValue={locationList[0]}
+      defaultLabel="지역"
     />
   );
 }

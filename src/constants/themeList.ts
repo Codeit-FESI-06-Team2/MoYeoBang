@@ -68,7 +68,7 @@ export const themeNameList: ThemeNameList = {
 };
 
 export const locationList = [
-  { value: 'all', label: '모든 지역' },
+  { value: 'all', label: '전체' },
   { value: 'geondae', label: '건대' },
   { value: 'hongdae', label: '홍대' },
   { value: 'hyehwa', label: '혜화' },
@@ -89,7 +89,7 @@ export const genres = [
 ];
 
 export const levels = [
-  { value: 'all', label: '모든 난이도' },
+  { value: 'all', label: '전체' },
   { value: '초급', label: '초급' },
   { value: '중급', label: '중급' },
   { value: '고급', label: '고급' },

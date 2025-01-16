@@ -2,18 +2,25 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import clsx from 'clsx';
 
 import { GatheringProps } from '@/types/gathering.types';
 
+interface PuzzleButtonProps {
+  layout?: 'card' | 'slot';
+  gathering: GatheringProps['card'] | undefined;
+}
+
 export default function PuzzleButton({
+  layout = 'card',
   gathering,
-}: {
-  gathering: GatheringProps['card'];
-}) {
+}: PuzzleButtonProps) {
   const [isFavorited, setIsFavorited] = useState(false);
 
   // 컴포넌트가 마운트될 때 찜 상태 불러오기
   useEffect(() => {
+    if (!gathering) return;
+
     const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
     setIsFavorited(
       favorites.some(
@@ -25,6 +32,8 @@ export default function PuzzleButton({
 
   const handleFavoriteToggle = (e: React.MouseEvent) => {
     e.stopPropagation();
+
+    if (!gathering) return;
 
     setIsFavorited((prev) => {
       const newFavorited = !prev;
@@ -52,7 +61,6 @@ export default function PuzzleButton({
       return newFavorited;
     });
   };
-
   return (
     <div className="absolute right-2 top-1 md:right-6 md:top-4">
       <button type="button" onClick={handleFavoriteToggle}>
@@ -64,7 +72,10 @@ export default function PuzzleButton({
           width={24}
           height={24}
           quality={100}
-          className="m-1 h-4 w-4 md:m-0 md:h-6 md:w-6"
+          className={clsx('object-contain', {
+            'm-1 h-4 w-4 md:m-0 md:h-6 md:w-6': layout === 'card',
+            'm-4 h-6 w-6 md:m-0': layout === 'slot',
+          })}
         />
       </button>
     </div>

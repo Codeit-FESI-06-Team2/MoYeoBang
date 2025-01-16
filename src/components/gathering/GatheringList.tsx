@@ -66,13 +66,13 @@ export default function GatheringList({ gatherings }: GatheringListProps) {
 
   return (
     <>
-      <section className="mx-1 flex flex-col xl:mx-5">
+      <section className="flex flex-col">
         <div className="flex flex-col gap-7">
           <GenreFilter
             onGenreChange={(value) => handleFilterChange('genre', value)}
             selectedGenre={filters.genre}
           />
-          <div className="text-text-secondary flex justify-between">
+          <div className="flex justify-between text-text-secondary">
             <div className="flex justify-between">
               <div className="mr-2 flex gap-2">
                 <LocationDropdown

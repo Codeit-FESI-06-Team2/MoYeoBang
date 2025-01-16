@@ -1,5 +1,6 @@
 import { mockGatherings } from '@/data/mockGatherings';
 
+import HeaderTitle from '@/components/@shared/HeaderTitle';
 import CreateGatheringBtn from '@/components/gathering/CreateGatheringBtn';
 import GatheringList from '@/components/gathering/GatheringList';
 
@@ -7,14 +8,13 @@ export default function Gathering() {
   const gatherings = mockGatherings;
 
   return (
-    <div className="mx-auto flex h-full max-w-6xl flex-col gap-12 px-4 py-24 md:py-32 xl:px-0">
-      <header className="mx-1 flex flex-col gap-2 text-white xl:mx-5">
-        <h1 className="order-2 text-lg font-semibold md:text-2xl">
-          지금 여기로 모여방
-        </h1>
-        <p className="order-1 text-sm font-medium">함께 할 사람이 없나요?</p>
-      </header>
-      <main className="flex flex-col gap-10 md:gap-12">
+    <div className="mx-auto flex h-full max-w-[1166px] flex-col gap-12 px-4 py-24 md:px-6 md:py-32 xl:px-0">
+      <HeaderTitle
+        title="지금 여기로 모여방"
+        content="함께 할 사람이 없나요?"
+        order="inverse"
+      />
+      <main className="flex flex-col gap-10 md:gap-12 ">
         <GatheringList gatherings={gatherings} />
         <CreateGatheringBtn />
       </main>

@@ -37,7 +37,7 @@ export default function GatheringCard({
             width={240}
             height={170}
             quality={100}
-            className="w-28 rounded-l-xl bg-default-tertiary md:w-60"
+            className="w-28 rounded-l-xl bg-default-tertiary object-cover md:w-60"
           />
           <div className="mx-3 my-2 flex flex-1 flex-col justify-between md:mx-6 md:my-4">
             <div className="flex justify-between">
@@ -68,7 +68,7 @@ export default function GatheringCard({
               </p>
             </div>
             <div className="flex flex-col gap-1">
-              <div className="text-text-secondary flex items-center gap-1 text-[10px] md:text-sm">
+              <div className="flex items-center gap-1 text-[10px] text-text-secondary md:text-sm">
                 <UserIcon />
                 <p>
                   {participantCount}/{capacity}

@@ -78,7 +78,7 @@ export default function MyPage() {
           width={241}
           height={121}
           alt="프로필 배경"
-          className="pointer-events-none absolute left-16 top-3 -z-10 md:hidden"
+          className="pointer-events-none absolute left-12 top-2 -z-10 md:hidden"
         />
         <IconButton
           src="/icons/pencil.svg"

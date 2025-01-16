@@ -101,3 +101,30 @@ export interface LikesGatheringListProps {
     participantCount: number;
   }[];
 }
+
+export interface GatheringCreaterDTO {
+  get: {
+    email: string;
+    nickname: string;
+    image: string;
+    gatherings: {
+      gatheringId: number;
+      name: string;
+      location: string;
+      themeName: string;
+      image: string;
+      dateTime: string;
+      capacity: number;
+      participantCount: number;
+    }[];
+    // reviews: [
+    //   {
+    //     reviewId: number;
+    //     gatheringId: number;
+    //     score: number;
+    //     comment: string;
+    //     createdAt: string;
+    //   },
+    // ];
+  };
+}

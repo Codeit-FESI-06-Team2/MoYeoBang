@@ -83,10 +83,27 @@ export default function Test() {
             <Button variant="tertiary" padding="8" fontSize="14">
               생성하기
             </Button>
-            <Button variant="tertiary" padding="10" className="bg-gray-50">
+            <Button variant="tertiary" padding="10">
               생성하기
             </Button>
             <Button variant="tertiary" padding="12" disabled>
+              비활성화
+            </Button>
+          </li>
+          <h3>{`variant = "tertiary-gray"`}</h3>
+          <li className="my-2 flex justify-between">
+            <Button
+              variant="tertiary-gray"
+              padding="8"
+              fontSize="14"
+              shape="round"
+            >
+              생성하기
+            </Button>
+            <Button variant="tertiary-gray" shape="round">
+              생성하기
+            </Button>
+            <Button variant="tertiary-gray" padding="12" shape="round" disabled>
               비활성화
             </Button>
           </li>

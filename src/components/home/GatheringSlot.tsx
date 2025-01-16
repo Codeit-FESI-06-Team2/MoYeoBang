@@ -6,7 +6,7 @@ import { extractHour } from '@/utils/dateUtils';
 import { GatheringProps } from '@/types/gathering.types';
 
 import AlarmBadge from '@/components/gathering/AlarmBadge';
-// import PuzzleButton from '@/components/gathering/PuzzleButton';
+import PuzzleButton from '@/components/gathering/PuzzleButton';
 
 export default function GatheringSlot({
   gatheringId,
@@ -19,7 +19,7 @@ export default function GatheringSlot({
   return (
     <figure className="relative col-span-1 row-span-1 max-w-full rounded-2xl bg-black xl:max-h-[317px] xl:max-w-[358px]">
       <Link href={`/gathering/${gatheringId}`}>
-        <AlarmBadge hour={extractHour(registrationEnd)} />
+        <AlarmBadge layout="slot" hour={extractHour(registrationEnd)} />
         <Image
           src={image}
           alt="방탈출 테마 이미지"
@@ -39,6 +39,21 @@ export default function GatheringSlot({
           {name}
         </p>
       </Link>
+      <PuzzleButton
+        layout="slot"
+        gathering={{
+          gatheringId,
+          registrationEnd,
+          name,
+          capacity,
+          participantCount,
+          image,
+          dateTime: '',
+          level: '',
+          themeName: '',
+          location: '',
+        }}
+      />
     </figure>
   );
 }

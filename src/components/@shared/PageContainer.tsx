@@ -6,7 +6,7 @@ interface PageContainerProps {
 
 export default function PageContainer({ children }: PageContainerProps) {
   return (
-    <main className="relative mx-10 mb-5 mt-48 h-full xl:mx-auto xl:w-[1166px]">
+    <main className="relative mx-4 mb-5 mt-32 h-full md:mx-6 xl:mx-auto xl:w-[1166px]">
       {children}
     </main>
   );

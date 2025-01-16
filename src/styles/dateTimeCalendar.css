@@ -1,6 +1,6 @@
 /* 캘린더 설정을 위한 CSS*/
 /* 캘린더 기본 설정 */
-.react-calendar {
+.date-time-calendar {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -10,7 +10,7 @@
 }
 
 /* 네비게이션 */
-.react-calendar__navigation {
+.date-time-calendar .react-calendar__navigation {
   display: flex;
   justify-content: space-between;
   color: #f7f7fa;
@@ -18,26 +18,26 @@
 }
 
 /* 네비게이션 타이틀 */
-.react-calendar__navigation__label {
+.date-time-calendar .react-calendar__navigation__label {
   font-weight: 700;
   font-size: 20px;
   text-align: start;
 }
 
 /* 네비게이션 버튼 */
-.react-calendar__navigation__arrow {
+.date-time-calendar .react-calendar__navigation__arrow {
   font-weight: 500;
   font-size: 24px;
   min-width: 24px;
 }
 
-.react-calendar__navigation__prev-button {
+.date-time-calendar .react-calendar__navigation__prev-button {
   position: absolute;
   right: 50px;
 }
 
 /* 요일 */
-.react-calendar__month-view__weekdays abbr {
+.date-time-calendar .react-calendar__month-view__weekdays abbr {
   text-decoration: none;
   font-weight: 600;
   justify-content: center;
@@ -49,7 +49,7 @@
 }
 
 /* 날짜 */
-.react-calendar__tile {
+.date-time-calendar .react-calendar__tile {
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
@@ -61,13 +61,14 @@
 }
 
 /* 지난달과 다음달 날짜 */
-.react-calendar__month-view__days__day--neighboringMonth {
+.date-time-calendar .react-calendar__month-view__days__day--neighboringMonth {
   color: #858899;
 }
 
 /* 선택한 날짜 */
-.react-calendar__month-view__days__day:enabled:hover::before,
-.react-calendar__tile--active::before {
+.date-time-calendar
+  .react-calendar__month-view__days__day:enabled:hover::before,
+.date-time-calendar .react-calendar__tile--active::before {
   content: '';
   background-color: #6659f4;
   border-radius: 9999px;
@@ -80,6 +81,7 @@
   z-index: -1;
 }
 
-.react-calendar__month-view__days__day:enabled:hover::before {
+.date-time-calendar
+  .react-calendar__month-view__days__day:enabled:hover::before {
   background-color: #4c41cd;
 }
