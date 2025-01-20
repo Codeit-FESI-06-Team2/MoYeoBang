@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 
-import GatheringBadge from '@/components/gathering/GatheringBadge';
+import GatheringBadge from '@/components/gathering/UI/GatheringBadge';
 import { formatDate } from '@/utils/dateUtils';
 import Image from 'next/image';
 import GatheringModal from '@/components/gathering/GatheringModal';
@@ -71,11 +71,11 @@ export default function MyCreateGatheringDetail({
         </div>
         <div className="flex flex-col gap-[1px]">
           <p className="text-[18px] font-semibold">{name}</p>
-          <p className="text-secondary-40 text-[14px] font-light">
+          <p className="text-[14px] font-light text-secondary-40">
             {themeName}
           </p>
         </div>
-        <div className="text-text-secondary flex items-center gap-1 text-[10px] md:text-sm">
+        <div className="flex items-center gap-1 text-[10px] text-text-secondary md:text-sm">
           <p>{formatDate(dateTime)}</p>
           <p>.</p>
           <Image
@@ -97,13 +97,13 @@ export default function MyCreateGatheringDetail({
           height={24}
           alt="드롭다운 클릭 버튼"
         />
-        <ul className="bg-secondary-80 absolute -right-10 z-50 mt-2 hidden w-32 rounded-md shadow-md group-hover:pointer-events-auto group-hover:block">
+        <ul className="absolute -right-10 z-50 mt-2 hidden w-32 rounded-md bg-secondary-80 shadow-md group-hover:pointer-events-auto group-hover:block">
           {liDropdowns.map((liDropdown) => (
             <li key={liDropdown.label}>
               <button
                 onClick={liDropdown.clickHandler}
                 type="button"
-                className="hover:bg-secondary-60 w-full rounded-md px-4 py-2 text-left"
+                className="w-full rounded-md px-4 py-2 text-left hover:bg-secondary-60"
               >
                 {liDropdown.label}
               </button>

@@ -32,15 +32,43 @@ export default function DateTimeCalendar({
   onDateChange,
   layout,
 }: DateTimeCalendarProps) {
-  const [date, setDate] = useState<string>(selectedDate);
+  const [date, setDate] = useState<string>(
+    selectedDate || new Date().toISOString()
+  );
   const [selectedHour, setSelectedHour] = useState(9);
   const [selectedMinute, setSelectedMinute] = useState(0);
   const [selectedPeriod, setSelectedPeriod] = useState('PM');
 
-  const formatDate = `${date} ${selectedPeriod} ${selectedHour.toString().padStart(2, '0')}:${selectedMinute.toString().padStart(2, '0')}`;
+  // 날짜만 hyphenYearMonthDay로 변환
+  const formatDate = () => {
+    const dateObject = new Date(date);
+    if (!date || Number.isNaN(dateObject.getTime())) return '';
+    return hyphenYearMonthDay(dateObject.toISOString());
+  };
 
   const handleDateChange = (newDate: CalendarValue) => {
-    setDate(hyphenYearMonthDay(String(newDate)));
+    let newSelectedDate: string;
+
+    if (Array.isArray(newDate)) {
+      newSelectedDate = newDate[0]?.toISOString() || '';
+    } else {
+      newSelectedDate = newDate?.toISOString() || '';
+    }
+
+    setDate(newSelectedDate);
+
+    // 새로운 날짜가 유효하면 YYYY-MM-DD 형식으로 변환하여 부모에 전달
+    if (
+      newDate &&
+      newDate instanceof Date &&
+      !Number.isNaN(newDate.getTime())
+    ) {
+      const formattedDate = formatDate(); // YYYY-MM-DD 형식으로 변환
+      const formattedDateTime = `${formattedDate} ${selectedHour.toString().padStart(2, '0')}:${selectedMinute.toString().padStart(2, '0')} ${selectedPeriod}`;
+      onDateChange(formattedDateTime); // YYYY-MM-DD hh:mm A 형식으로 전달
+    } else {
+      onDateChange('');
+    }
   };
 
   const handleReset = () => {
@@ -50,7 +78,11 @@ export default function DateTimeCalendar({
   };
 
   const handleSubmit = () => {
-    onDateChange(formatDate);
+    const finalDate = formatDate(); // 날짜 포맷
+    const finalTime = `${selectedHour.toString().padStart(2, '0')}:${selectedMinute.toString().padStart(2, '0')} ${selectedPeriod}`; // 시간 포맷
+
+    // 날짜와 시간을 결합한 문자열 최종 전달
+    onDateChange(`${finalDate} ${finalTime}`);
     onClose();
   };
 
@@ -67,7 +99,7 @@ export default function DateTimeCalendar({
 
   return (
     <div
-      className={`${isOpen ? '' : 'hidden'} ${layout} border-1 absolute z-100 flex flex-col rounded-[10px] border-default-tertiary bg-default-tertiary py-5 pl-6 pr-6 text-black shadow-xl md:pr-0`}
+      className={`${isOpen ? '' : 'hidden'} ${layout} border-1 absolute z-80 flex flex-col rounded-[10px] border-default-tertiary bg-default-tertiary py-5 pl-6 pr-6 text-black shadow-xl md:pr-0`}
     >
       <div className="flex flex-col md:h-[332px] md:flex-row">
         <Calendar

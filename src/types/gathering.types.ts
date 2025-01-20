@@ -65,7 +65,7 @@ export interface GatheringProps {
     image: string;
   };
   badge: {
-    icon?: '고급' | '중급' | '초급';
+    icon?: 'high' | 'middle' | 'low';
     shape?: 'default' | 'round';
     variant?: 'primary' | 'secondary' | 'tertiary';
     border?: 'primary';
