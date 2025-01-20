@@ -12,7 +12,7 @@ import EmptyElement from '@/components/@shared/EmptyElement';
 import GatheringCard from '@/components/gathering/GatheringCard';
 import DateDropdown from '@/components/allReview/DateDropdown';
 import LocationDropdown from '@/components/allReview/LocationDropdown';
-import LevelDropdown from '@/components/gathering/LevelDropdown';
+import LevelDropdown from '@/components/gathering/selector/LevelDropdown';
 import SortDropdown from '@/components/@shared/SortDropdown';
 import GenreFilter from '@/components/@shared/GenreFilter';
 

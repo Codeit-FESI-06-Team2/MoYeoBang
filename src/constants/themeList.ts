@@ -90,7 +90,13 @@ export const genres = [
 
 export const levels = [
   { value: 'all', label: '전체' },
-  { value: '초급', label: '초급' },
-  { value: '중급', label: '중급' },
-  { value: '고급', label: '고급' },
+  { value: 'low', label: '초급' },
+  { value: 'middle', label: '중급' },
+  { value: 'high', label: '고급' },
 ];
+
+export const levelToKorean: Record<string, string> = {
+  high: '고급',
+  middle: '중급',
+  low: '초급',
+};

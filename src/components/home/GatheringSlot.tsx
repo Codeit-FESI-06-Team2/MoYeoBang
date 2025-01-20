@@ -5,7 +5,7 @@ import UserIcon from '@/public/icons/user.svg';
 import { extractHour } from '@/utils/dateUtils';
 import { GatheringProps } from '@/types/gathering.types';
 
-import AlarmBadge from '@/components/gathering/AlarmBadge';
+import AlarmBadge from '@/components/gathering/UI/AlarmBadge';
 import PuzzleButton from '@/components/gathering/PuzzleButton';
 
 export default function GatheringSlot({

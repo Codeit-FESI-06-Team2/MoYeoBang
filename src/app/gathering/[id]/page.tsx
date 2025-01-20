@@ -1,5 +1,3 @@
-/* eslint-disable prettier/prettier */
-
 'use client';
 
 import Button from '@/components/@shared/Button';
@@ -18,7 +16,7 @@ export default function GatheringDetail({ params }: any) {
       {/* TEST: id 값을 정상적으로 로드 */}
       <h1 className="mt-36">Gathering ID: {id}</h1>
       <p>오정협 - 모임 상세페이지</p>
-      <div className="border-default-inverse flex h-[66px] w-full items-center justify-between rounded-2xl border px-7 py-2 md:h-[90px]">
+      <div className="flex h-[66px] w-full items-center justify-between rounded-2xl border border-default-inverse px-7 py-2 md:h-[90px]">
         <div className="flex items-center gap-3">
           <Image
             src={createrProfile.image || '/profile_image_default.png'}

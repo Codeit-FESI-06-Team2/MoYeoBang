@@ -5,9 +5,9 @@ import clsx from 'clsx';
 import { GatheringProps } from '@/types/gathering.types';
 
 const levelIcons = {
-  고급: { src: '/icons/graph_high.svg', alt: '고급 난이도 아이콘' },
-  중급: { src: '/icons/graph_middle.svg', alt: '중급 난이도 아이콘' },
-  초급: { src: '/icons/graph_low.svg', alt: '초급 난이도 아이콘' },
+  high: { src: '/icons/graph_high.svg', alt: '고급 난이도 아이콘' },
+  middle: { src: '/icons/graph_middle.svg', alt: '중급 난이도 아이콘' },
+  low: { src: '/icons/graph_low.svg', alt: '초급 난이도 아이콘' },
 };
 
 export default function GatheringBadge({

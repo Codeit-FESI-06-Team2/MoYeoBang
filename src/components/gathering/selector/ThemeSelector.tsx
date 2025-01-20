@@ -12,6 +12,7 @@ interface ThemeSelectorProps {
   selectedThemeName: string;
   setSelectedThemeName: (themeName: string) => void;
   searchAttempted: boolean;
+  searchMessage: string;
 }
 
 export default function ThemeSelector({
@@ -24,6 +25,7 @@ export default function ThemeSelector({
   selectedThemeName,
   setSelectedThemeName,
   searchAttempted,
+  searchMessage,
 }: ThemeSelectorProps) {
   return (
     <div className="text-md flex flex-1 flex-col items-start gap-3">
@@ -46,7 +48,14 @@ export default function ThemeSelector({
           검색
         </Button>
       </div>
-      {filteredThemes.length > 0 ? (
+
+      {searchAttempted && searchMessage && (
+        <p className="w-full rounded-lg bg-secondary-20 px-3 py-2 text-secondary-80">
+          {searchMessage}
+        </p>
+      )}
+
+      {searchAttempted && !searchMessage && filteredThemes.length > 0 && (
         <div className="-my-1 flex w-full flex-col flex-wrap gap-1 rounded-lg bg-secondary-5 p-1">
           {filteredThemes.map((filteredTheme) => (
             <button
@@ -66,12 +75,6 @@ export default function ThemeSelector({
             </button>
           ))}
         </div>
-      ) : (
-        searchAttempted && (
-          <p className="w-full rounded-lg bg-secondary-20 px-3 py-2 text-secondary-80">
-            검색어가 없어요. 다시 입력해 주세요.
-          </p>
-        )
       )}
     </div>
   );
