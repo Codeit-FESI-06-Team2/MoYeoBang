@@ -3,6 +3,9 @@ name: BuildTest
 on:
   pull_request: # 모든 PR이 등록 될 때
 
+env:
+  NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -17,7 +20,5 @@ jobs:
       - name: Run lint
         run: npm run lint # lint 테스트
 
-      - name: Set environment variable and run build
-        run: |
-          echo "NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}" >> .env
-          npm run build # build 테스트
+      - name: Run build
+        run: npm run build # build 테스트
