@@ -1,7 +1,7 @@
 'use client';
 
 import { ErrorBoundary } from 'react-error-boundary';
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
 import { QueryProvider } from '@/components/@shared/QueryProvider';
 import EmptyElement from '@/components/@shared/EmptyElement';
@@ -10,7 +10,7 @@ import GatheringCard from '@/components/gathering/GatheringCard';
 import { getGatheringsByParticipantCount } from '@/axios/gather/apis';
 
 export default function NearFullCapacities() {
-  const { data: gatherings } = useSuspenseQuery({
+  const { data: gatherings } = useQuery({
     queryKey: ['gatherings/participantcount'],
     queryFn: getGatheringsByParticipantCount,
   });
