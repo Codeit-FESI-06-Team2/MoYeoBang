@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
 import usePagination from '@/hooks/usePagination';
 import { QueryProvider } from '@/components/@shared/QueryProvider';
@@ -11,7 +11,7 @@ import GatheringSlot from '@/components/home/GatheringSlot';
 import { getGatheringsByRegistrationEnd } from '@/axios/gather/apis';
 
 export default function NearDeadlines() {
-  const { data: gatherings } = useSuspenseQuery({
+  const { data: gatherings } = useQuery({
     queryKey: ['gatherings/registrationEnd'],
     queryFn: getGatheringsByRegistrationEnd,
   });
