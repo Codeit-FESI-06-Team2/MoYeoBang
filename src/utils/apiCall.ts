@@ -17,12 +17,11 @@ export const apiCall = async (
       method === 'get' ? publicAxiosInstance : authAxiosInstance;
 
     // 현재 URL이 상대 경로인지 확인
+    const baseURL = publicAxiosInstance.defaults.baseURL ?? '';
     const isRelativeUrl = url.startsWith('/');
 
     // 절대 URL로 변환
-    const finalUrl = isRelativeUrl
-      ? `${publicAxiosInstance.defaults.baseURL}${url}`
-      : url;
+    const finalUrl = isRelativeUrl ? `${baseURL}${url}` : url;
 
     // TEST:쿼리 문자열 생성
     const queryString = qs.stringify(queryParams, {
