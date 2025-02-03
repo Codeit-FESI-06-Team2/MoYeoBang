@@ -18,10 +18,13 @@ export const apiCall = async (
 
     // 기본 baseURL이 있는지 확인하고, 없으면 빈 문자열 할당
     const baseURL =
-      publicAxiosInstance.defaults.baseURL
+      publicAxiosInstance.defaults.baseURL || process.env.NEXT_PUBLIC_API_URL;
+    console.log(baseURL);
 
     // 현재 URL이 상대 경로인지 확인 후 절대 경로로 변환
-    const finalUrl = url.startsWith('/') ? `${baseURL}${url}` : `${baseURL}${url}`;
+    const finalUrl = url.startsWith('/')
+      ? `${baseURL}${url}`
+      : `${baseURL}${url}`;
 
     // TEST:쿼리 문자열 생성
     const queryString = qs.stringify(queryParams, {
@@ -34,7 +37,7 @@ export const apiCall = async (
     const fullUrl = queryString ? `${finalUrl}?${queryString}` : finalUrl;
     console.log('Full URL:', fullUrl);
 
-    const response = await axiosInstance[method](fullUrl, data, {
+    const response = await axiosInstance[method](finalUrl, data, {
       ...axiosConfig,
       params: queryParams,
       paramsSerializer: (params) =>
