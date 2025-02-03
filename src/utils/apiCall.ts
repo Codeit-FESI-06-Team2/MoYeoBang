@@ -34,7 +34,7 @@ export const apiCall = async (
     const fullUrl = queryString ? `${finalUrl}?${queryString}` : finalUrl;
     console.log('Full URL:', fullUrl);
 
-    const response = await axiosInstance[method](finalUrl, data, {
+    const response = await axiosInstance[method](fullUrl, data, {
       ...axiosConfig,
       params: queryParams,
       paramsSerializer: (params) =>
