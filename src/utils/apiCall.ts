@@ -17,7 +17,8 @@ export const apiCall = async (
       method === 'get' ? publicAxiosInstance : authAxiosInstance;
 
     // 기본 baseURL이 있는지 확인하고, 없으면 빈 문자열 할당
-    const baseURL = publicAxiosInstance.defaults.baseURL || process.env.NEXT_PUBLIC_API_URL;
+    const baseURL =
+      publicAxiosInstance.defaults.baseURL || process.env.NEXT_PUBLIC_API_URL;
 
     // 현재 URL이 상대 경로인지 확인 후 절대 경로로 변환
     const finalUrl = url.startsWith('/') ? `${baseURL}${url}` : url;
