@@ -10,7 +10,7 @@ import GatheringCard from '@/components/gathering/GatheringCard';
 import { getGatheringsByParticipantCount } from '@/axios/gather/apis';
 
 export default function NearFullCapacities() {
-  const { data: gatherings } = useQuery({
+  const { data: gatherings = [] } = useQuery({
     queryKey: ['gatherings/participantcount'],
     queryFn: getGatheringsByParticipantCount,
   });
