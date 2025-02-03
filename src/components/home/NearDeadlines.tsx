@@ -11,7 +11,7 @@ import GatheringSlot from '@/components/home/GatheringSlot';
 import { getGatheringsByRegistrationEnd } from '@/axios/gather/apis';
 
 export default function NearDeadlines() {
-  const { data: gatherings } = useQuery({
+  const { data: gatherings = [] } = useQuery({
     queryKey: ['gatherings/registrationEnd'],
     queryFn: getGatheringsByRegistrationEnd,
   });
