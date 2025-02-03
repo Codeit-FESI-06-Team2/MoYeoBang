@@ -18,4 +18,6 @@ jobs:
         run: npm run lint # lint 테스트
 
       - name: Run build
+        env:
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
         run: npm run build # build 테스트
