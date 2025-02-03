@@ -4,7 +4,7 @@ on:
   pull_request: # 모든 PR이 등록 될 때
 
 env:
-  NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+  NEXT_PUBLIC_API_URL: 'https://54.180.79.214.nip.io/'
 
 jobs:
   lint:
