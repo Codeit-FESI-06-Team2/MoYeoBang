@@ -28,7 +28,7 @@ export default function GatheringList() {
     INIT_GATHRING.FILTER
   );
 
-  const { data: gatherings } = useQuery({
+  const { data: gatherings = [] } = useQuery({
     queryKey: ['gatherings', filters, selectedSort],
     queryFn: () =>
       getGatherings({
