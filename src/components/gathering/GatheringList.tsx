@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, Suspense, useEffect } from 'react';
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
 import type {
   GatheringDto,
@@ -28,7 +28,7 @@ export default function GatheringList() {
     INIT_GATHRING.FILTER
   );
 
-  const { data: gatherings } = useSuspenseQuery({
+  const { data: gatherings } = useQuery({
     queryKey: ['gatherings', filters, selectedSort],
     queryFn: () =>
       getGatherings({
