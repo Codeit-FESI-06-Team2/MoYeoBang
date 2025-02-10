@@ -63,6 +63,7 @@ const LoginInput = React.forwardRef<HTMLInputElement, LoginInputProps>(
           placeholder={placeholder}
           className={clsx(
             'w-full rounded-lg px-4 py-[10px] font-medium outline outline-1',
+            '[&:-webkit-autofill]:[transition-delay:9999s]',
             {
               'bg-secondary-5 text-secondary-70 placeholder:text-secondary-50':
                 variant === 'default',

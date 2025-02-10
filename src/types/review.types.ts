@@ -1,5 +1,6 @@
 export interface ReviewDto {
   get: {
+    [x: string]: any;
     reviewId?: number;
     score: number; // 리뷰 점수
     comment: string; // 리뷰 내용

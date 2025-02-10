@@ -18,6 +18,14 @@ export interface SearchGatheringParams {
   keyword: string;
 }
 
+export interface SurveyUrlParams {
+  name: string;
+  genre: string;
+  playtime: string;
+  level: string;
+  location: string;
+}
+
 // Response
 export interface GatheringDto {
   get: {
