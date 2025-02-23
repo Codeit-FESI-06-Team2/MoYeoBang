@@ -61,10 +61,10 @@ https://moyeobang.vercel.app/ 🔗
 
 <table align="center">
     <tr align="center">
-        <td><img src="https://github.com/user-attachments/assets/cf35d192-641e-4d0a-adcc-ec26a09b4b27" alt="홈" width="200" /></td>
-        <td><img src="https://github.com/user-attachments/assets/d79712f4-3427-4d2d-b8a2-e431fa630f79" alt="로그인" width="200" /></td>
-        <td><img src="https://github.com/user-attachments/assets/a536475d-1698-4f34-94da-9b41066371f6" alt="회원가입" width="200" /></td>
-        <td><img src="https://github.com/user-attachments/assets/5c1468ae-cf0e-4bee-b8b6-ca5d432e4649" alt="마이페이지" width="200" /></td>
+        <td><img src="https://github.com/user-attachments/assets/cf35d192-641e-4d0a-adcc-ec26a09b4b27" alt="홈" width="150" /></td>
+        <td><img src="https://github.com/user-attachments/assets/d79712f4-3427-4d2d-b8a2-e431fa630f79" alt="로그인" width="150" /></td>
+        <td><img src="https://github.com/user-attachments/assets/a536475d-1698-4f34-94da-9b41066371f6" alt="회원가입" width="150" /></td>
+        <td><img src="https://github.com/user-attachments/assets/5c1468ae-cf0e-4bee-b8b6-ca5d432e4649" alt="마이페이지" width="150" /></td>
     </tr>
     <tr align="center">
         <td>🏠 홈</td>
@@ -73,10 +73,10 @@ https://moyeobang.vercel.app/ 🔗
         <td>마이페이지</td>
     </tr>
       <tr align="center">
-        <td><img src="https://github.com/user-attachments/assets/41a9eaf6-bb00-4556-bdfb-6d28ab5f49ef" alt="모임 목록" width="200" /></td>
-        <td><img src="https://github.com/user-attachments/assets/f9686e51-dd8b-4373-a185-57673d9dd809" alt="모임 상세" width="200" /></td>
-        <td><img src="https://github.com/user-attachments/assets/098b9508-77ef-4be2-85e1-a0725478facd" alt="모임 생성 및 수정" width="200" /></td>
-        <td><img src="https://github.com/user-attachments/assets/7ef5cc50-97c9-4d7b-a7e2-ec86377be86e" alt="찜한 모임" width="200" /></td>
+        <td><img src="https://github.com/user-attachments/assets/41a9eaf6-bb00-4556-bdfb-6d28ab5f49ef" alt="모임 목록" width="150" /></td>
+        <td><img src="https://github.com/user-attachments/assets/f9686e51-dd8b-4373-a185-57673d9dd809" alt="모임 상세" width="150" /></td>
+        <td><img src="https://github.com/user-attachments/assets/098b9508-77ef-4be2-85e1-a0725478facd" alt="모임 생성 및 수정" width="150" /></td>
+        <td><img src="https://github.com/user-attachments/assets/7ef5cc50-97c9-4d7b-a7e2-ec86377be86e" alt="찜한 모임" width="150" /></td>
     </tr>
       <tr align="center">
         <td>개설된 모임 목록</td>
@@ -85,9 +85,9 @@ https://moyeobang.vercel.app/ 🔗
         <td>찜한 모임 목록</td>
     </tr>
       <tr align="center">
-        <td colspan="2"><img src="https://github.com/user-attachments/assets/05200ca2-00c7-444a-88c2-2719d6c95649" alt="방탈출 테마 추천" width="200" /></td>
-        <td><img src="https://github.com/user-attachments/assets/550e0f9e-18b7-49ba-aaa0-d4ab6456e367" alt="모든 리뷰" width="200" /></td>
-        <td><img src="https://github.com/user-attachments/assets/ea704fc5-d947-4f73-aed3-1a6c579f12fa" alt="검색" width="200" /></td>
+        <td colspan="2"><img src="https://github.com/user-attachments/assets/05200ca2-00c7-444a-88c2-2719d6c95649" alt="방탈출 테마 추천" width="150" /></td>
+        <td><img src="https://github.com/user-attachments/assets/550e0f9e-18b7-49ba-aaa0-d4ab6456e367" alt="모든 리뷰" width="150" /></td>
+        <td><img src="https://github.com/user-attachments/assets/ea704fc5-d947-4f73-aed3-1a6c579f12fa" alt="검색" width="150" /></td>
     </tr>
       <tr align="center">
         <td colspan="2">방탈출 테마 추천</td>
