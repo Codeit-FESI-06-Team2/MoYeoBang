@@ -127,10 +127,10 @@ https://moyeobang.vercel.app/ 🔗
         <td>DESIGN</td>
     </tr>
       <tr align="center" >
-        <td>찜한 목록 페이지<br>모든 리뷰 페이지</td>
-        <td>홈 페이지<br>모임 목록 페이지<br>방탈출 테마 추천 페이지<br>모임 생성 및 수정 페이지</td>
+        <td>찜한 목록<br>모든 리뷰</td>
+        <td>홈<br>모임 목록<br>방탈출 테마 추천지<br>모임 생성 및 수정</td>
         <td>마이 페이지<br>검색 페이지</td>
-        <td>로그인 페이지<br>회원가입 페이지<br>모임 상세 페이지</td>
+        <td>로그인<br>회원가입<br>모임 상세</td>
     </tr>
 </table>
 
