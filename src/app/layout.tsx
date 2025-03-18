@@ -1,8 +1,17 @@
 import type { Metadata } from 'next';
+import localFont from 'next/font/local';
+
 import Header from '../components/@shared/Header';
 import { Providers } from '../providers/providers';
 import '../styles/globals.css';
 import '../styles/scrollbar.css';
+
+const pretendard = localFont({
+  src: '../../public/fonts/PretendardVariable.woff2',
+  display: 'swap',
+  weight: '45 920',
+  variable: '--font-pretendard',
+});
 
 export const metadata: Metadata = {
   title: '모여방',
@@ -45,7 +54,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ko">
+    <html
+      lang="ko"
+      className={`${pretendard.variable} ${pretendard.className}`}
+    >
       <body className="scrollbar-x-hidden default-scrollbar">
         <Providers>
           <Header />

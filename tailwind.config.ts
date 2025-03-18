@@ -4,6 +4,15 @@ const config: Config = {
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
     extend: {
+      fontFamily: {
+        pretendard: [
+          'var(--font-pretendard)',
+          'sans-serif',
+          'system-ui',
+          'Apple SD Gothic Neo',
+          'AppleGothic',
+        ],
+      },
       colors: {
         default: {
           primary: '#6659F4',
@@ -64,9 +73,7 @@ const config: Config = {
           secondary: '#F5F7FD',
         },
       },
-      fontFamily: {
-        sans: 'var(--font-pretendard), -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif',
-      },
+
       spacing: {
         '1/10': '10%',
         '1/5': '20%',
