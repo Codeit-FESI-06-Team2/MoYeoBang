@@ -7,7 +7,7 @@ import Spinner from '@/components/@shared/Spinner';
 
 export default function Gathering() {
   return (
-    <div className="flex h-full w-full flex-col gap-12 px-4 py-24 md:px-6 md:py-32 xl:mx-auto xl:max-w-[1166px] xl:px-0">
+    <div className="flex h-full w-full flex-col gap-12 px-4 pb-12 pt-24 md:px-6 md:pt-32 xl:mx-auto xl:max-w-[1166px] xl:px-0">
       <HeaderTitle
         title="모임 찾기"
         h1="지금 여기로 모여방"

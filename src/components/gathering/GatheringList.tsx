@@ -3,8 +3,13 @@
 import { useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useSuspenseInfiniteQuery } from '@tanstack/react-query';
+import {
+  List,
+  AutoSizer,
+  CellMeasurer,
+  CellMeasurerCache,
+} from 'react-virtualized';
 
-import type { GatheringDto } from '@/types/gathering.types';
 import { getGatherings } from '@/axios/gather/apis';
 import { sortList } from '@/constants/sortList';
 
@@ -19,13 +24,58 @@ import SortDropdown from '@/components/@shared/dropdown/SortDropdown';
 import GenreFilter from '@/components/@shared/GenreFilter';
 
 export default function GatheringList() {
-  const { ref: targetRef, inView } = useInView();
   const [pageParam, setPageParam] = useState(0);
   const [selectedSort, setSelectedSort] = useState(INIT_GATHERING.SORT.sortBy);
   const [filters, setFilters] = useState(INIT_GATHERING.FILTER);
   const [initialScrollRestored, setInitialScrollRestored] = useState(false);
+  const [visibleStartIndex, setVisibleStartIndex] = useState(0);
+  const [visibleEndIndex, setVisibleEndIndex] = useState(2);
+  const [isMobile, setIsMobile] = useState(false);
+  const { ref: bottomObserverRef, inView: bottomInView } = useInView();
 
   const queryKey = ['gatherings', filters, selectedSort];
+
+  // 모임 목록 무한스크롤
+  const {
+    data: gatherings,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useSuspenseInfiniteQuery({
+    queryKey,
+    queryFn: async ({ pageParam: fetchPageParam }) => {
+      const response = await getGatherings({
+        limit: 5,
+        offset: fetchPageParam,
+        sortOrder: INIT_GATHERING.SORT.sortOrder,
+        sortBy: selectedSort,
+        ...filters,
+      });
+
+      return response;
+    },
+    getNextPageParam: (lastPage, allPages) => {
+      const nextPage = allPages.length;
+
+      return !lastPage || lastPage.length < 5 ? undefined : nextPage;
+    },
+    initialPageParam: 0,
+    gcTime: 1000 * 60 * 60 * 24, // 24시간
+    staleTime: 1000 * 60 * 10, // 10분
+  });
+
+  const allGatherings = gatherings.pages.flat();
+
+  // react-virtualized를 위한 CellMeasurer 캐시 설정
+  const cache = new CellMeasurerCache({
+    fixedWidth: true,
+    defaultHeight: isMobile ? 120 : 178,
+    keyMapper: (index: number) => {
+      // 각 아이템에 고유한 키를 제공하여 캐싱 문제 방지
+      if (!allGatherings || !allGatherings[index]) return String(index);
+      return String(allGatherings[index]?.id || index);
+    },
+  });
 
   // 필터 및 정렬 상태를 세션 스토리지에 저장
   useEffect(() => {
@@ -61,46 +111,15 @@ export default function GatheringList() {
     }
   }, []);
 
-  // 모임 목록 무한스크롤
-  const {
-    data: gatherings,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-  } = useSuspenseInfiniteQuery({
-    queryKey,
-    queryFn: async ({ pageParam: fetchPageParam }) => {
-      const response = await getGatherings({
-        limit: 2,
-        offset: fetchPageParam,
-        sortOrder: INIT_GATHERING.SORT.sortOrder,
-        sortBy: selectedSort,
-        ...filters,
-      });
-
-      return response;
-    },
-    getNextPageParam: (lastPage, allPages) => {
-      const nextPage = allPages.length;
-
-      return !lastPage || lastPage.length < 2 ? undefined : nextPage;
-    },
-    initialPageParam: 0,
-    gcTime: 1000 * 60 * 60 * 24, // 24시간
-    staleTime: 1000 * 60 * 10, // 10분
-  });
-
-  const allGatherings = gatherings.pages.flat();
-
   // 데이터 추가 요청
   useEffect(() => {
-    if (!inView || !hasNextPage || isFetchingNextPage) {
+    if (!bottomInView || !hasNextPage || isFetchingNextPage) {
       return;
     }
 
     setPageParam((prev) => prev + 1);
     fetchNextPage();
-  }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
+  }, [bottomInView, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   // 필터 및 정렬 변경 핸들러
   const handleFilterChange = (
@@ -109,11 +128,112 @@ export default function GatheringList() {
   ) => {
     setFilters((prev) => ({ ...prev, [key]: value }));
     setPageParam(0);
+    cache.clearAll();
   };
 
   const onSortingChange = (sortOption: string) => {
     setSelectedSort(sortOption);
     setPageParam(0);
+    cache.clearAll();
+  };
+
+  // 미디어 쿼리로 모바일 상태 판단
+  useEffect(() => {
+    if (typeof document === 'undefined') return;
+
+    const mediaQuery = window.matchMedia('(max-width: 767px)');
+
+    // 초기 상태 설정
+    setIsMobile(mediaQuery.matches);
+
+    // 미디어 쿼리 변경 리스너
+    const handleMediaQueryChange = (event: MediaQueryListEvent) => {
+      setIsMobile(event.matches);
+    };
+
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener('change', handleMediaQueryChange);
+    } else {
+      // 이전 버전 브라우저 지원
+      mediaQuery.addListener(handleMediaQueryChange);
+    }
+
+    // eslint-disable-next-line consistent-return
+    return () => {
+      if (mediaQuery.removeEventListener) {
+        mediaQuery.removeEventListener('change', handleMediaQueryChange);
+      } else {
+        mediaQuery.removeListener(handleMediaQueryChange);
+      }
+    };
+  }, []);
+
+  // 뷰포트에 보이는 데이터 계산
+  useEffect(() => {
+    if (typeof document === 'undefined') return;
+
+    const rowHeight = isMobile ? 116 : 170;
+    const viewportHeight = document.documentElement.clientHeight;
+    const visibleRowCount = Math.ceil(viewportHeight / rowHeight);
+
+    setVisibleStartIndex(Math.max(0, pageParam * 2 - visibleRowCount));
+    setVisibleEndIndex((pageParam + 1) * 2 + visibleRowCount);
+  }, [pageParam, isMobile]);
+
+  useEffect(() => {
+    cache.clearAll();
+  }, [isMobile]);
+
+  // 필터 변경시 캐시 초기화
+  useEffect(() => {
+    if (cache) {
+      cache.clearAll();
+    }
+  }, [filters, selectedSort]);
+
+  // 행 렌더링 함수
+  const rowRenderer = ({
+    index,
+    key,
+    parent,
+    style,
+  }: {
+    index: number;
+    key: string;
+    parent: any;
+    style: React.CSSProperties;
+  }) => {
+    const item = allGatherings[index];
+    const rowHeight = isMobile ? 116 : 178;
+    const marginBottom = isMobile ? 4 : 8;
+
+    // 마지막 요소에 관찰자 참조 추가
+    const isLastItem = index === allGatherings.length - 1;
+
+    // 고유한 키 생성
+    const itemKey = item?.id || index;
+
+    return (
+      <CellMeasurer
+        key={`${itemKey}-${filters.genre}-${filters.date}-${filters.location}-${filters.level}-${selectedSort}`}
+        cache={cache}
+        parent={parent}
+        columnIndex={0}
+        rowIndex={index}
+      >
+        <div
+          style={{
+            ...style,
+            height: rowHeight,
+            marginBottom: `${marginBottom}px`,
+            boxSizing: 'border-box',
+          }}
+        >
+          <GatheringCard {...item} key={`card-${itemKey}-${filters.genre}`} />
+          {isLastItem && <div ref={bottomObserverRef} className="h-[1px]" />}
+        </div>
+      </CellMeasurer>
+    );
   };
 
   return (
@@ -150,13 +270,40 @@ export default function GatheringList() {
           </div>
         </div>
       </section>
+
       {allGatherings.length > 0 ? (
-        <section className="mx-auto grid h-full w-full grid-cols-1 gap-3 text-white xl:grid-cols-2">
-          {allGatherings.map((gathering: GatheringDto['get']) => (
-            <GatheringCard key={gathering.gatheringId} {...gathering} />
-          ))}
-          <div ref={targetRef} style={{ height: '1px' }} />
-        </section>
+        <div
+          className="w-full"
+          style={{
+            height: isMobile ? 'calc(100vh - 30vh)' : 'calc(100vh - 24vh)',
+            position: 'relative',
+          }}
+        >
+          <AutoSizer>
+            {({ height, width }) => (
+              <List
+                height={height}
+                width={width}
+                rowCount={allGatherings.length}
+                rowHeight={isMobile ? 120 : 178}
+                rowRenderer={rowRenderer}
+                deferredMeasurementCache={cache}
+                overscanRowCount={5}
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  paddingRight: '4px',
+                }}
+                // 필터나 정렬이 변경되면 List를 강제로 다시 렌더링
+                key={`list-${filters.genre}-${filters.date}-${filters.location}-${filters.level}-${selectedSort}`}
+              />
+            )}
+          </AutoSizer>
+          <div ref={bottomObserverRef} className="absolute bottom-0 h-[1px]" />
+        </div>
       ) : (
         <EmptyElement>
           아직 모임이 없어요,
