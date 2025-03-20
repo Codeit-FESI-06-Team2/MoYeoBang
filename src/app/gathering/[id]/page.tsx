@@ -38,22 +38,24 @@ export default function GatheringDetail({
   return (
     <div className="mx-auto max-w-screen-xl px-4">
       <title>{`모여방 | ${gatheringData.name}`}</title>
-      <div className="mt-36">
+      <div className="mt-20 flex flex-col gap-12 md:mt-28 md:gap-14 lg:mt-36 lg:gap-16">
         {/* Main section과 JoinBox를 포함하는 컨테이너 */}
-        <div className="flex flex-col gap-6 min-[1111px]:flex-row">
+        <div className="flex flex-col gap-6 lg:flex-row lg:gap-8">
           {/* Main section 컨테이너 */}
-          <div className="flex flex-1 justify-center min-[1111px]:justify-start">
-            <GatheringMainSection {...gatheringData} />
+          <div className="flex-1">
+            <div className="flex w-full justify-center lg:justify-start">
+              <GatheringMainSection {...gatheringData} />
+            </div>
           </div>
           <JoinBoxSection {...gatheringData} gatheringId={Number(params.id)} />
         </div>
 
-        <div className="mt-16 flex justify-center min-[1111px]:justify-start">
+        <div className="flex w-full justify-center lg:justify-start">
           <GatheringDetailSection {...gatheringData} />
         </div>
 
         {hostData && (
-          <div className="mt-16 flex justify-center min-[1111px]:justify-start">
+          <div className="flex w-full justify-center lg:justify-start">
             <ProfileSection
               createrProfile={hostData}
               isOpen={isOpen}
@@ -64,7 +66,7 @@ export default function GatheringDetail({
         )}
 
         {/* Review section */}
-        <div className="mb-20 mt-16 flex justify-center min-[1111px]:justify-start">
+        <div className="mb-20 flex w-full justify-center lg:justify-start">
           <GatheringReviewSection gatheringId={Number(params.id)} />
         </div>
       </div>

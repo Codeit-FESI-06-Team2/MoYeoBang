@@ -5,7 +5,11 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import Button from '@/components/@shared/button/Button';
 import Modal from '@/components/@shared/Modal';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { cancelParticipation, participateGathering } from '@/axios/gather/apis';
+import {
+  cancelParticipation,
+  checkParticipationStatus,
+  participateGathering,
+} from '@/axios/gather/apis';
 import { useState, useEffect } from 'react';
 
 interface JoinBoxSectionProps {
@@ -30,7 +34,6 @@ export default function JoinBoxSection({
   const searchParams = useSearchParams();
   const queryClient = useQueryClient();
 
-  // localStorage에서 참여 상태를 관리
   const storageKey = `participation-${gatheringId}`;
   const [isParticipating, setIsParticipating] = useState(() => {
     if (typeof window !== 'undefined') {
@@ -48,12 +51,104 @@ export default function JoinBoxSection({
   const isExpanded = searchParams.has('joinbox');
   const isExpired = new Date(registrationEnd) < new Date();
 
-  // 참여 상태가 변경될 때마다 localStorage 업데이트
   useEffect(() => {
     if (typeof window !== 'undefined') {
       localStorage.setItem(storageKey, isParticipating.toString());
     }
   }, [isParticipating, storageKey]);
+
+  useEffect(() => {
+    const checkParticipationState = async () => {
+      try {
+        const response = await checkParticipationStatus(gatheringId);
+        if (response?.data) {
+          setIsParticipating(response.data.isParticipating);
+          setCurrentParticipantCount(response.data.participantCount);
+        }
+      } catch (error: any) {
+        // 500 에러는 무시하고 기존 상태 유지
+        if (error.response?.status === 401) {
+          localStorage.removeItem(storageKey);
+          setIsParticipating(false);
+        }
+        // 500 에러 시 기존 상태 유지
+        if (error.response?.status !== 500) {
+          console.error('참여 상태 확인 실패:', error);
+        }
+      }
+    };
+
+    const handleFocus = () => {
+      const token = localStorage.getItem('accessToken');
+      if (token) {
+        checkParticipationState();
+      } else {
+        // 토큰이 없는 경우 처리
+        setIsParticipating(false);
+        localStorage.removeItem(storageKey);
+      }
+    };
+
+    window.addEventListener('focus', handleFocus);
+
+    // 초기 실행
+    const token = localStorage.getItem('accessToken');
+    if (token) {
+      checkParticipationState();
+    }
+
+    return () => {
+      window.removeEventListener('focus', handleFocus);
+    };
+  }, [gatheringId, storageKey]);
+
+  const { mutate: participate } = useMutation({
+    mutationFn: () => participateGathering(gatheringId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['gathering-detail', gatheringId],
+      });
+      setIsParticipating(true);
+      setCurrentParticipantCount((prev) => prev + 1);
+    },
+    onError: (error: any) => {
+      if (error.response?.status === 401) {
+        localStorage.removeItem(storageKey);
+        setIsParticipating(false);
+      }
+    },
+  });
+
+  const { mutate: cancel } = useMutation({
+    mutationFn: () => cancelParticipation(gatheringId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['gathering-detail', gatheringId],
+      });
+      setIsParticipating(false);
+      setCurrentParticipantCount((prev) => prev - 1);
+    },
+    onError: (error: any) => {
+      if (error.response?.status === 401) {
+        localStorage.removeItem(storageKey);
+        setIsParticipating(false);
+      }
+    },
+  });
+
+  const handleParticipation = () => {
+    const token = localStorage.getItem('accessToken');
+    if (!token) {
+      setIsModalOpen(true);
+      return;
+    }
+
+    if (isParticipating) {
+      cancel();
+    } else {
+      participate();
+    }
+  };
 
   const getStatusConfig = () => {
     if (isExpired) {
@@ -72,50 +167,6 @@ export default function JoinBoxSection({
       text: '모집완료',
       className: 'text-status-danger',
     };
-  };
-
-  const { mutate: participate } = useMutation({
-    mutationFn: () => participateGathering(gatheringId),
-    onSuccess: () => {
-      queryClient.setQueryData(
-        ['gathering-detail', gatheringId],
-        (oldData: any) => ({
-          ...oldData,
-          participantCount: oldData.participantCount + 1,
-        })
-      );
-      setCurrentParticipantCount((prev) => prev + 1);
-      setIsParticipating(true);
-    },
-  });
-
-  const { mutate: cancel } = useMutation({
-    mutationFn: () => cancelParticipation(gatheringId),
-    onSuccess: () => {
-      queryClient.setQueryData(
-        ['gathering-detail', gatheringId],
-        (oldData: any) => ({
-          ...oldData,
-          participantCount: oldData.participantCount - 1,
-        })
-      );
-      setCurrentParticipantCount((prev) => prev - 1);
-      setIsParticipating(false);
-    },
-  });
-
-  const handleParticipation = () => {
-    const token = localStorage.getItem('accessToken');
-    if (!token) {
-      setIsModalOpen(true);
-      return;
-    }
-
-    if (isParticipating) {
-      cancel();
-    } else {
-      participate();
-    }
   };
 
   const toggleExpand = (e: React.MouseEvent) => {
@@ -143,24 +194,21 @@ export default function JoinBoxSection({
 
   const isButtonDisabled = () => {
     if (isExpired) return true;
-    if (isParticipating) return false; // 참여 중인 경우 항상 활성화
-    return !isRecruiting; // 모집 중이 아닐 때만 비활성화
+    if (isParticipating) return false;
+    return !isRecruiting;
   };
 
   const status = getStatusConfig();
 
   return (
     <>
-      <aside className="h-[2500px] max-h-[2500px] w-full min-[376px]:h-auto min-[1111px]:w-[369px]">
+      <aside className="w-full lg:w-[369px]">
         {/* 모바일 뷰 */}
-        <div className="min-[1111px]:hidden">
+        <div className="lg:hidden">
           <div className="fixed bottom-0 left-0 right-0 z-50">
             <div className="mx-auto w-full max-w-screen-xl">
               {isExpanded && (
-                <div
-                  className="mx-[17px] rounded-lg border border-secondary-70 bg-[#17171C] p-4 
-                min-[420px]:mx-[104px]"
-                >
+                <div className="mx-4 rounded-lg border border-secondary-70 bg-[#17171C] p-4 sm:mx-6">
                   <div className="mb-6">
                     <h2 className="mb-2 text-xl font-bold text-text-default">
                       {name}
@@ -193,10 +241,7 @@ export default function JoinBoxSection({
                 </div>
               )}
 
-              <div
-                className="mx-[17px] flex items-center justify-between gap-4 py-4 
-              min-[420px]:mx-[104px]"
-              >
+              <div className="mx-4 flex items-center justify-between gap-4 py-4 sm:mx-6">
                 <Button
                   onClick={toggleExpand}
                   className="flex h-11 items-center justify-center rounded-lg p-2"
@@ -229,7 +274,7 @@ export default function JoinBoxSection({
         </div>
 
         {/* 데스크톱 뷰 */}
-        <div className="hidden min-[1111px]:block">
+        <div className="hidden lg:block">
           <div className="rounded-xl border border-secondary-70 bg-[#17171C]">
             <div className="p-6">
               <div className="mb-6">

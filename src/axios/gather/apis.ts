@@ -63,11 +63,9 @@ export const getGatheringReviews = (gatheringId: number) => {
 };
 
 export const checkParticipationStatus = (gatheringId: number) => {
-  return apiCall(
-    'get',
-    `${API_PATH.gathering.participant(gatheringId)}/status`,
-    null,
-    {}
+  return authAxiosInstance.get(
+    // publicAxiosInstance 대신 authAxiosInstance 사용
+    `${API_PATH.gathering.participant(gatheringId)}/status`
   );
 };
 

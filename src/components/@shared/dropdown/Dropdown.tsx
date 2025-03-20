@@ -26,10 +26,12 @@ interface DropdownProps {
 
 /**
  * 지역 선택을 위한 드롭다운 컴포넌트
- *
+
  * @param defaultLabel 초기 선택 label (EX: 지역)
  * @param onChange 선택값 변경 시 호출되는 콜백 함수
  * @param className 추가 스타일링을 위한 클래스명
+ * 
+ * 
  */
 
 export default function Dropdown({
@@ -57,7 +59,7 @@ export default function Dropdown({
         initialOption;
       setSelectedOption(selected);
     }
-  }, [selectedValue, options]);
+  }, [selectedValue, options, initialOption]);
 
   const handleSelect = (option: DropdownOption) => {
     setSelectedOption(option);

@@ -1,5 +1,3 @@
-/* eslint-disable prettier/prettier */
-
 import { GatheringCreaterDTO } from '@/types/gathering.types';
 import Button from '@/components/@shared/button/Button';
 import GatheringCreaterProfileModal from '@/components/gatheringDetail/GatheringCreaterProfileModal';
@@ -19,18 +17,21 @@ export default function ProfileSection({
   closeModal,
 }: ProfileSectionProps) {
   return (
-    <div>
-      <div className="border-default-inverse flex h-[66px] w-full items-center justify-between rounded-2xl border px-7 py-2 md:h-[90px]">
+    <section className="w-full max-w-[326px] sm:max-w-[688px] lg:max-w-[805px]">
+      <div className="flex h-[66px] w-full items-center justify-between rounded-2xl border border-default-inverse px-4 py-2 md:h-[90px] md:px-7">
         <div className="flex items-center gap-3">
           <Image
             src={createrProfile.image || '/icons/profile_image_default.svg'}
             width={52}
             height={52}
             alt="모임주최자 프로필 이미지"
+            className="h-10 w-10 md:h-[52px] md:w-[52px]"
           />
           <div>
-            <p className="text-xl font-bold">{createrProfile.nickname}</p>
-            <p className="text-sm">
+            <p className="text-base font-bold md:text-xl">
+              {createrProfile.nickname}
+            </p>
+            <p className="text-xs md:text-sm">
               모집글 ({createrProfile.gatherings.length})
             </p>
           </div>
@@ -60,6 +61,6 @@ export default function ProfileSection({
           createrProfile={createrProfile}
         />
       )}
-    </div>
+    </section>
   );
 }
