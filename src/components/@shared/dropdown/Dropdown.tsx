@@ -57,7 +57,7 @@ export default function Dropdown({
         initialOption;
       setSelectedOption(selected);
     }
-  }, [selectedValue, options]);
+  }, [selectedValue, options, initialOption]);
 
   const handleSelect = (option: DropdownOption) => {
     setSelectedOption(option);

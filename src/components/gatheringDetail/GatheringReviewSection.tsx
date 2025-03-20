@@ -42,9 +42,9 @@ export default function GatheringReviewSection({
 
   if (isLoading) {
     return (
-      <section className="w-full max-w-[326px] md:max-w-[688px] lg:max-w-[805px]">
+      <section className="w-full max-w-[326px] sm:max-w-[688px] lg:max-w-[805px]">
         <div className="border-t border-secondary-80" />
-        <h2 className="font-noto mt-6 text-xl leading-[28px] md:text-2xl lg:text-[26px]">
+        <h2 className="mt-6 text-xl leading-[28px] md:text-2xl lg:text-[26px]">
           방탈출 리뷰
         </h2>
         <div className="mt-4 flex items-center justify-center">
@@ -56,9 +56,9 @@ export default function GatheringReviewSection({
 
   if (isError) {
     return (
-      <section className="w-full max-w-[326px] md:max-w-[688px] lg:max-w-[805px]">
+      <section className="w-full max-w-[326px] sm:max-w-[688px] lg:max-w-[805px]">
         <div className="border-t border-secondary-80" />
-        <h2 className="font-noto mt-6 text-xl leading-[28px] md:text-2xl lg:text-[26px]">
+        <h2 className="mt-6 text-xl leading-[28px] md:text-2xl lg:text-[26px]">
           방탈출 리뷰
         </h2>
         <div className="mt-4 flex items-center justify-center">
@@ -69,9 +69,9 @@ export default function GatheringReviewSection({
   }
 
   return (
-    <section className="w-full max-w-[326px] min-[376px]:max-w-[688px] lg:max-w-[805px]">
-      <div className="mb-[19px] mt-[19px] w-full max-w-[326px] border-t border-secondary-80 min-[376px]:max-w-[688px] lg:max-w-[805px]" />
-      <h2 className="font-noto mt-6 text-xl leading-[28px] md:text-2xl lg:text-[26px]">
+    <section className="w-full max-w-[326px] sm:max-w-[688px] lg:max-w-[805px]">
+      <div className="my-5 w-full border-t border-secondary-80" />
+      <h2 className="mt-6 text-xl leading-[28px] md:text-2xl lg:text-[26px]">
         방탈출 리뷰
       </h2>
 
