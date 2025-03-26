@@ -1,6 +1,10 @@
 import { publicAxiosInstance, authAxiosInstance } from '@/axios/axiosInstance';
 import qs from 'qs';
 import { AxiosRequestConfig } from 'axios';
+import NodeCache from 'node-cache';
+
+// 캐시 유효 시간: 60초
+const apiCache = new NodeCache({ stdTTL: 60 });
 
 type HttpMethod = 'get' | 'post' | 'patch' | 'delete' | 'put';
 
@@ -13,6 +17,16 @@ export const apiCall = async (
 ) => {
   try {
     const { params: queryParams, ...axiosConfig } = config;
+
+    // 캐시 확인
+    if (method === 'get') {
+      const cacheKey = `${url}:${JSON.stringify(queryParams)}`;
+      const cachedData = apiCache.get(cacheKey);
+
+      if (cachedData) {
+        return cachedData;
+      }
+    }
 
     const axiosInstance =
       method === 'get' ? publicAxiosInstance : authAxiosInstance;
@@ -36,6 +50,13 @@ export const apiCall = async (
     }
 
     const response = await axiosInstance.request(requestConfig);
+
+    // 캐시 저장
+    if (method === 'get') {
+      const cacheKey = `${url}:${JSON.stringify(queryParams)}`;
+      apiCache.set(cacheKey, response.data);
+    }
+
     return response.data;
   } catch (error) {
     console.error('API call error:', error);

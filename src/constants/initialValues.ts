@@ -20,6 +20,10 @@ export const INIT_GATHERING = {
   DELETE: {
     gatheringId: 0,
   },
+  SORT: {
+    sortBy: 'dateTime',
+    sortOrder: 'asc',
+  },
   FILTER: {
     genre: '',
     location: '',

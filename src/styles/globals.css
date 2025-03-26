@@ -2,18 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: 'Pretendard';
-  src: url('/fonts/PretendardVariable.woff2') format('woff2');
-}
-
-:root {
-  --font-pretendard: 'Pretendard', sans-serif;
-}
-
 @layer base {
   html {
-    @apply antialiased;
+    @apply font-pretendard antialiased;
   }
 
   body {

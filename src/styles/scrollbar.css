@@ -58,3 +58,15 @@
 .scrollbar-x-hidden {
   scrollbar-width: none;
 }
+
+.scrollbar-y-hidden {
+  overflow-y: auto;
+}
+
+.scrollbar-y-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-y-hidden {
+  scrollbar-width: none;
+}
